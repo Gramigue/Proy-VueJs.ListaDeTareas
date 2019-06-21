@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<title>Insert title here</title>
+
+<style>
+
+.glyphicon-check, .glyphicon-unchecked
+
+{
+cursor : pointer;
+};
+
+</style>
+</head>
+<body>
+	<div class="contenedro">
+		<div id="app">
+
+
+			<h2>Lista de Tareas</h2>
+			<ul>
+				<li v-for="x in tareas">
+				<span v-text="x.titulo"></span>
+				 <span @click="x.completo = false" v-if="x.completo" class="glyphicon glyphicon-check"></span>
+				  <span @click="x.completo = true" v-else class="glyphicon glyphicon-unchecked"></span>
+				  
+				  </li>
+				<li class="form-inline">
+				<input @keyup.enter="addx" v-model="nuevaTarea" type="text" class="form-control" />
+				
+					
+					
+					</li>
+
+			</ul>
+
+<pre>
+
+{{$data}}
+</pre>
+
+
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+	<script>
+		var o = new Vue({
+
+			el : '#app',
+			data : {
+				nuevaTarea:"",
+
+				tareas : [ {
+					titulo : "aprender guitarra",
+					completo : true
+				}, {
+					titulo : "aprender matematica",
+					completo : true
+				}, {
+					titulo : "aprender cocina",
+					completo : false
+				} ]
+
+			},
+			methods : {
+				addx: function(){
+					if (this.nuevaTarea.length < 1) return;
+					this.tareas.push({titulo: this.nuevaTarea, completo : false});
+				
+					this.nuevaTarea = "";
+				
+				}
+
+			}
+		})
+	</script>
+
+</body>
+</html>
